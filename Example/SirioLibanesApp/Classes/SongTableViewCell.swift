@@ -10,15 +10,15 @@ import UIKit
 
 class SongTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var heartImage: UIImageView!
+    @IBOutlet weak var rankingLabel: UILabel!
+    @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var counterLabel: UILabel!
     @IBOutlet weak var songLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
-    
-    @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
     override var tag : Int {
         didSet {
-            self.minusButton.tag = self.tag
             self.plusButton.tag = self.tag
         }
     }
@@ -27,7 +27,6 @@ class SongTableViewCell: UITableViewCell {
       super.awakeFromNib()
       self.selectionStyle = UITableViewCellSelectionStyle.none
       
-      self.minusButton.layer.cornerRadius = 10
       self.plusButton.layer.cornerRadius = 10
     }
 

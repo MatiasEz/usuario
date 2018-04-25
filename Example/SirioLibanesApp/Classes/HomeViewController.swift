@@ -71,29 +71,37 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func getUserDataAndContinue () {
-        let userId = Auth.auth().currentUser?.uid;
-        
-        if (userId == nil) {
+        guard let userId = Auth.auth().currentUser?.uid else {
             self.displayError(message: "Hubo un problema con tu usuario, por favor deslogueate y vuelve a empezar")
             return;
         }
       
 
-      ref.child("Users").child(userId!).child("nickname").observeSingleEvent(of: .value, with: { (snapshot) in
-         let nickname = snapshot.value as? String?
+      ref.child("Users").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
          
-         if (nickname == nil ) {
+         guard let userMap = snapshot.value as? [AnyHashable : Any] else {
+            return
+         }
+         
+         let firstName = userMap ["nombre"] as? String?
+         let lastName = userMap ["apellido"] as? String?
+         let nickname = userMap ["nickname"] as? String?
+         
+         
+         if (nickname == nil && firstName == nil && lastName == nil ) {
             self.displayError(message: "Hubo un problema con tu cuenta, por favor deslogueate y vuelve a empezar")
             return
          }
 
+         UserDefaults.standard.set(firstName!, forKey: "firstNameKey")
+         UserDefaults.standard.set(lastName!, forKey: "lastNameKey")
          UserDefaults.standard.set(nickname!, forKey: "nicknameKey")
       }) { (error) in
          self.displayError(message: "Hubo un problema obteniendo tu usuario, por favor deslogueate y vuelve a empezar")
          return
       }
         
-        let unwUserId = userId!
+        let unwUserId = userId
         
         ref.child("Users").child(unwUserId).child("eventos").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value

@@ -44,30 +44,23 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
         getUserDataAndContinue(completionHandler: nil)
     }
     
-    @IBAction func minusPressed(_ sender: Any) {
-        let button = sender as! UIButton
-        let map = self.songs [button.tag]
-        let songTitle = map ["tema"] as! String
-        changeCounter(for: songTitle, increasing: false)
-    }
-    
     @IBAction func plusPressed(_ sender: Any) {
         let button = sender as! UIButton
         let map = self.songs [button.tag]
         let songTitle = map ["tema"] as! String
-        changeCounter(for: songTitle, increasing: true)
+        changeCounter(for: songTitle)
     }
     
-    func changeCounter(for song : String, increasing increase : Bool) {
-      
-      
-      
+    func changeCounter(for song : String) {
+      var increase = true
       let userId = Auth.auth().currentUser?.uid;
-      let songKey = "\(String(describing: userId)) + \(pageName) + \(song)"
+      let songKey = "\(userId ?? "0") + \(pageName) + \(song)"
       let songAlreadyVoted = UserDefaults.standard.bool(forKey: songKey)
       if (songAlreadyVoted) {
-         displayError(message: "No puedes votar dos veces por la misma cancion")
-         return
+         UserDefaults.standard.set(false, forKey: songKey)
+         increase = false
+      } else {
+         UserDefaults.standard.set(true, forKey: songKey)
       }
       
         getUserDataAndContinue { (success) in
@@ -93,14 +86,14 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
             
             self.songs = self.songs.filter { $0 ["tema"] as! String != song}
-         let artist = (currentMap! ["artista"] as! String?) ?? "Desconocido"
-            let newMap = ["tema":song,"votos":counter, "artista":artist] as [AnyHashable : Any]
+            let artist = (currentMap! ["artista"] as! String?) ?? "Desconocido"
+            let user = (currentMap! ["user"] as! String?) ?? "Desconocido"
+            let newMap = ["tema":song,"votos":counter, "artista":artist, "user": user] as [AnyHashable : Any]
             self.songs.append(newMap)
             self.songs = self.songs.sorted(by: self.sorterForSong)
             
             
             self.ref.child("Musica").child(self.pageName).setValue(self.songs)
-            UserDefaults.standard.set(true, forKey: songKey)
          
             self.descriptionLabel.text = "Estas son las canciones más votadas"
             self.tableView.reloadData()
@@ -110,6 +103,7 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
                     self.descriptionLabel.alpha = 1
                 })
             }
+            self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
         }
     }
     
@@ -149,6 +143,8 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
                     self.tableView.alpha = 1
                     self.descriptionLabel.alpha = 1
                 })
+               
+               self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
             }
             
             if (completionHandler != nil) {
@@ -233,20 +229,30 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.displayError(message:"El campo de ingreso esta vacio");
             return
         }
+      
+      guard let firstName = UserDefaults.standard.string(forKey: "firstNameKey"),
+         let lastName = UserDefaults.standard.string(forKey: "lastNameKey") else {
+         displayError(message: "Por favor cierra sesión y vuelve a iniciar")
+         return
+      }
         
         getUserDataAndContinue { (success) in
-            let map = ["tema":song,"artista":artist,"votos":1] as [AnyHashable : Any]
-            self.songs.append(map)
-            self.songs = self.songs.sorted(by: self.sorterForSong)
-            self.ref.child("Musica").child(self.pageName).setValue(self.songs)
-            self.descriptionLabel.text = "Estas son las canciones más votadas"
+         let map = ["tema":song,"artista":artist,"votos":1, "user":"\(firstName) \(lastName)"] as [AnyHashable : Any]
+         self.songs.append(map)
+         self.songs = self.songs.sorted(by: self.sorterForSong)
+         self.ref.child("Musica").child(self.pageName).setValue(self.songs)
+         self.descriptionLabel.text = "Estas son las canciones más votadas"
+         DispatchQueue.main.async {
             self.tableView.reloadData()
             if (self.tableView.alpha == 0) {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.tableView.alpha = 1
-                    self.descriptionLabel.alpha = 1
-                })
+               UIView.animate(withDuration: 0.3, animations: {
+                  self.tableView.alpha = 1
+                  self.descriptionLabel.alpha = 1
+               })
             }
+            self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+         }
+
         }
     }
     
@@ -258,14 +264,42 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
         let song = self.songs [indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "songCell") as! SongTableViewCell
         cell.tag = indexPath.row
-        cell.songLabel.text = song ["tema"] as! String?
+      let songTitle = song ["tema"] as! String?
+        cell.songLabel.text = songTitle
+      
+      let userId = Auth.auth().currentUser?.uid;
+      let songKey = "\(userId ?? "0") + \(pageName) + \(songTitle ?? "")"
+      let songAlreadyVoted = UserDefaults.standard.bool(forKey: songKey)
+      if (songAlreadyVoted) {
+         cell.heartImage.image = UIImage(named:"heartfull")
+      } else {
+         cell.heartImage.image = UIImage(named:"heartvoid")
+      }
+      
+      
          let artist = (song ["artista"] as! String?) ?? "Desconocido"
         cell.artistLabel.text = artist
         let number = song ["votos"] as! Int
         cell.counterLabel.text = "\(number)"
+      
+      let rankingNumber = indexPath.row + 1
+      let rankingString = "\(rankingNumber)"
+      cell.rankingLabel.text = rankingString
+      
+      
+      let userName = song ["user"] as? String
+      cell.userLabel.text = userName ?? "Sin usuario"
+      
+      
+      
         return cell
     }
-    
+   
+      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+      {
+         return 140.0;//Choose your custom row height
+      }
+   
     func displayError (message: String = "No pudimos obtener las canciones, intenta mas tarde.") {
         PKHUD.sharedHUD.hide()
         let alert = UIAlertController(title: "¡Hubo un error!", message: message, preferredStyle: UIAlertControllerStyle.alert)

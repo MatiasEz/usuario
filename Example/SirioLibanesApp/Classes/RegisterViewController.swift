@@ -115,6 +115,8 @@ class RegisterViewController: UIViewController {
       if let unwrappedUserId = userId {
          self.ref.child("Users").child(unwrappedUserId).setValue(["nombre": name,"apellido": lastname, "telefono": phone,"email": email,"nickname":nickname])
          UserDefaults.standard.set(nickname, forKey: "nicknameKey")
+         UserDefaults.standard.set(name, forKey: "firstNameKey")
+         UserDefaults.standard.set(lastname, forKey: "lastNameKey")
          
       } else {
          displayError()

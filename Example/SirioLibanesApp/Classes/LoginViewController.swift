@@ -102,14 +102,26 @@ class LoginViewController: UIViewController {
          
          let userId = (Auth.auth().currentUser?.uid)!;
          let ref = Database.database().reference()
-         ref.child("Users").child(userId).child("nickname").observeSingleEvent(of: .value, with: { (snapshot) in
-            let nickname = snapshot.value as? String?
+         ref.child("Users").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            
+            guard let userMap = snapshot.value as? [AnyHashable : Any] else {
+               return
+            }
+            
+            
+            
+            let firstName = userMap ["nombre"] as? String?
+            let lastName = userMap ["apellido"] as? String?
+            let nickname = userMap ["nickname"] as? String?
             
             if (nickname == nil ) {
                self.displayError()
                return
             }
             
+            UserDefaults.standard.set(firstName!, forKey: "firstNameKey")
+            UserDefaults.standard.set(lastName!, forKey: "lastNameKey")
             UserDefaults.standard.set(nickname!, forKey: "nicknameKey")
             UserDefaults.standard.set(email, forKey: "lastUserKey")
             
