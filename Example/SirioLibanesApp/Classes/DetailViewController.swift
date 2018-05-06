@@ -18,8 +18,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var maybeButton: UIButton!
-    @IBOutlet weak var distanceConstraint: NSLayoutConstraint!
-    @IBOutlet weak var confirmButton: UIButton!
+   @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     public var information : [AnyHashable: Any] = [:]
     public var pageName : String = ""
@@ -197,7 +196,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let habilitado = self.information ["habilitada"] as! Bool? ?? false
-        distanceConstraint.constant = 8
         self.confirmButton.alpha = 0;
       self.maybeButton.alpha = 0;
       self.cancelButton.alpha = 0;
