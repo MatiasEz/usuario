@@ -10,6 +10,7 @@ import UIKit
 
 class SongTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var rankingImage: UIImageView!
     @IBOutlet weak var heartImage: UIImageView!
     @IBOutlet weak var rankingLabel: UILabel!
     @IBOutlet weak var userLabel: UILabel!

@@ -96,14 +96,19 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.ref.child("Musica").child(self.pageName).setValue(self.songs)
          
             self.descriptionLabel.text = "Estas son las canciones más votadas"
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+               self.tableView.reloadData()
+            }
+
             if (self.tableView.alpha == 0) {
                 UIView.animate(withDuration: 0.3, animations: {
                     self.tableView.alpha = 1
                     self.descriptionLabel.alpha = 1
                 })
             }
-            self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+               self.tableView.reloadData()
+            }
         }
     }
     
@@ -144,7 +149,9 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
                     self.descriptionLabel.alpha = 1
                 })
                
-               self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+               DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                  self.tableView.reloadData()
+               }
             }
             
             if (completionHandler != nil) {
@@ -237,7 +244,7 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
       }
         
         getUserDataAndContinue { (success) in
-         let map = ["tema":song,"artista":artist,"votos":1, "user":"\(firstName) \(lastName)"] as [AnyHashable : Any]
+         let map = ["tema":song,"artista":artist,"votos":0, "user":"\(firstName) \(lastName)"] as [AnyHashable : Any]
          self.songs.append(map)
          self.songs = self.songs.sorted(by: self.sorterForSong)
          self.ref.child("Musica").child(self.pageName).setValue(self.songs)
@@ -250,7 +257,9 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
                   self.descriptionLabel.alpha = 1
                })
             }
-            self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+               self.tableView.reloadData()
+            }
          }
 
         }
@@ -272,19 +281,44 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
       let songAlreadyVoted = UserDefaults.standard.bool(forKey: songKey)
       if (songAlreadyVoted) {
          cell.heartImage.image = UIImage(named:"heartfull")
+         cell.counterLabel.textColor = UIColor.white
       } else {
          cell.heartImage.image = UIImage(named:"heartvoid")
+         cell.counterLabel.textColor = UIColor.red
       }
       
       
          let artist = (song ["artista"] as! String?) ?? "Desconocido"
         cell.artistLabel.text = artist
-        let number = song ["votos"] as! Int
-        cell.counterLabel.text = "\(number)"
+        let number = song ["votos"] as? Int
+        cell.counterLabel.text = "\(number ?? 0)"
       
       let rankingNumber = indexPath.row + 1
       let rankingString = "\(rankingNumber)"
       cell.rankingLabel.text = rankingString
+      
+      if (indexPath.row > 2) {
+         cell.rankingLabel.isHidden = false
+         cell.rankingImage.isHidden = true
+      } else {
+         cell.rankingLabel.isHidden = true
+         cell.rankingImage.isHidden = false
+      }
+      
+      switch (indexPath.row) {
+            case 0:
+               cell.rankingImage.image = UIImage(named:"ranking1");
+               break;
+            case 1:
+               cell.rankingImage.image = UIImage(named:"ranking2");
+               break;
+            case 2:
+               cell.rankingImage.image = UIImage(named:"ranking3");
+               break;
+            default:
+               break;
+      }
+      
       
       
       let userName = song ["user"] as? String
@@ -297,7 +331,7 @@ class SongsViewController: UIViewController, UITableViewDataSource, UITableViewD
    
       func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
       {
-         return 140.0;//Choose your custom row height
+         return 80.0;//Choose your custom row height
       }
    
     func displayError (message: String = "No pudimos obtener las canciones, intenta mas tarde.") {
