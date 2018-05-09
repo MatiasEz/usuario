@@ -267,7 +267,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let viewController: DetailViewController = segue.destination as! DetailViewController
             viewController.information = self.information
             viewController.pageName = self.pageName
-        }
+         }
         
         if segue.identifier == "social" {
             let viewController: SocialViewController = segue.destination as! SocialViewController

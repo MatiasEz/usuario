@@ -19,6 +19,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var maybeButton: UIButton!
    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var callButton: UIButton!
+
     @IBOutlet weak var tableView: UITableView!
     public var information : [AnyHashable: Any] = [:]
     public var pageName : String = ""
@@ -276,6 +278,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             viewController.information = self.information
             viewController.pageName = self.pageName
         }
+    }
+    @IBAction func callPhone(_ sender: Any) {
+      guard let number = URL(string: "tel://" + "1121628170") else { return }
+      UIApplication.shared.openURL(number)
     }
     
 }
