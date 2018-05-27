@@ -21,9 +21,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
    @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var callButton: UIButton!
 
+    @IBOutlet weak var labelPhone: UILabel!
     @IBOutlet weak var tableView: UITableView!
     public var information : [AnyHashable: Any] = [:]
     public var pageName : String = ""
+   
+   var numPhone : String = ""
+    
+    
    var detailCell : DetailTableViewCell?
     var ref: DatabaseReference!
    
@@ -41,7 +46,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func wontAssistPressed(_ sender: Any) {
          assignUserToEvent(state:"cancelado")
     }
-    func assignUserToEvent (state: String = "indeterminado")
+    func assignUserToEvent (state: String = "quizas")
     {
         let userEmail = Auth.auth().currentUser?.email;
         if let unwrappedUserEmail = userEmail {
@@ -115,7 +120,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             })
         }
         
-        if (key == "indeterminado" || key == "cancelado") {
+        if (key == "cancelado") {
 
 
          self.confirmButton.backgroundColor = UIColor.clear
@@ -128,7 +133,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             })
         }
       
-      if (key == "quizas") {
+      if (key == "indeterminado" || key == "quizas") {
          self.confirmButton.backgroundColor = UIColor.clear
          self.maybeButton.backgroundColor = kOrange
          self.cancelButton.backgroundColor = UIColor.clear
@@ -152,6 +157,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         ref = Database.database().reference()
+      
+      let numPhone : String = self.information["telefono"] as! String
+        self.labelPhone.text = numPhone
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         
@@ -280,8 +288,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     @IBAction func callPhone(_ sender: Any) {
-      guard let number = URL(string: "tel://" + "1121628170") else { return }
+        guard let number = URL(string: "tel://" + self.labelPhone.text!) else { return }
       UIApplication.shared.openURL(number)
+      
     }
     
 }

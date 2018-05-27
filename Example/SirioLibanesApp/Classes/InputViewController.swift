@@ -10,10 +10,12 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import BarcodeScanner
+import AVFoundation
 
 class InputViewController: UIViewController, BarcodeScannerCodeDelegate, BarcodeScannerErrorDelegate, BarcodeScannerDismissalDelegate {
 
    
+    @IBOutlet weak var cameraHeightConstraint: NSLayoutConstraint!
     
     var ref: DatabaseReference!
     public var information : [AnyHashable: Any] = [:]
@@ -31,7 +33,24 @@ class InputViewController: UIViewController, BarcodeScannerCodeDelegate, Barcode
         actionButton.layer.borderColor = UIColor.white.cgColor
         self.navigationItem.backBarButtonItem?.title = " "
       self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+      self.updateCameraScannerWithPermission()
     }
+   
+   func updateCameraScannerWithPermission () {
+      //ESTE METODO COLAPSA O EXTIENDE LA VISTA DE SCANNER DEPENDIENDO DEL ESTADO ACTUAL DE PERMISOS
+      let cameraMediaType = AVMediaType.video
+      let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: cameraMediaType)
+      
+      switch cameraAuthorizationStatus {
+      case .authorized:
+         self.cameraHeightConstraint.constant = 9000;
+         break
+      default:
+         self.cameraHeightConstraint.constant = 0;
+      }
+      
+
+   }
    
     func scannerDidDismiss(_ controller: BarcodeScannerViewController) {
     }
@@ -153,7 +172,7 @@ class InputViewController: UIViewController, BarcodeScannerCodeDelegate, Barcode
         
     }
     
-    func assignUserToEvent (state: String = "indeterminado")
+    func assignUserToEvent (state: String = "quizas")
     {
         let userEmail = Auth.auth().currentUser?.email;
             if let unwrappedUserEmail = userEmail {

@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import PKHUD
+import AVFoundation
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var actionButton: UIButton!
@@ -28,6 +29,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var underline: UIView!
     
     override func viewDidLoad() {
+      
+      var ezcurra = Trabajador(nombre: "Matias Ezcurra", altura: 20, genero: "Masculino", velocidad: 120, peso: 200)
+      ezcurra.esHomosexual = true
+      ezcurra.tieneOjos = false
+      ezcurra.peso = 250
+      
         actionButton.backgroundColor = .clear
         actionButton.layer.cornerRadius = 20
         actionButton.layer.borderWidth = 1
@@ -252,6 +259,57 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
       
         self.present(alert, animated: true, completion: nil)
     }
+    
+    @IBAction func newEventButtonPressed(_ sender: Any) {
+      //ESTE METODO VA A SER EJECUTADO CUANDO EL USUARIO TOCA EL BOTON
+      let cameraMediaType = AVMediaType.video
+      let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: cameraMediaType)
+      
+      switch cameraAuthorizationStatus {
+     
+      case .denied:
+         self.irAPantallaPermisos()
+         break
+         
+      case .authorized:
+         self.irAPantallaScanner()
+         break
+         
+      case .restricted:
+         self.irAPantallaPermisos()
+         break
+         
+      case .notDetermined:
+         self.pedirPermisos()
+         break
+      }
+      
+
+      
+    }
+   
+   func pedirPermisos() {
+      let cameraMediaType = AVMediaType.video
+      AVCaptureDevice.requestAccess(for: cameraMediaType) { granted in
+         DispatchQueue.main.async {
+            if granted {
+               self.irAPantallaScanner()
+            } else {
+               self.irAPantallaPermisos()
+            }
+         }
+      }
+   }
+   
+   func irAPantallaScanner() {
+         self.performSegue(withIdentifier: "newEvent", sender: nil)
+   }
+   
+   func irAPantallaPermisos() {
+      self.performSegue(withIdentifier: "permissionEvent", sender: nil)
+   }
+    
+    
     
     func displayError (message: String = "No pudimos obtener tus eventos, intenta mas tarde.") {
         let alert = UIAlertController(title: "¡Hubo un error!", message: message, preferredStyle: UIAlertControllerStyle.alert)

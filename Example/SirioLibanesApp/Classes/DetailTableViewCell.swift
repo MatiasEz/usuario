@@ -14,6 +14,10 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var minuteLabel: UILabel!
     @IBOutlet weak var hourLabel: UILabel!
     @IBOutlet weak var daysLabel: UILabel!
+    @IBOutlet weak var finishEventLabel: UILabel!
+    @IBOutlet weak var hourSubLabel: UILabel!
+    @IBOutlet weak var minuteSubLabel: UILabel!
+    @IBOutlet weak var daysSubLabel: UILabel!
     
     
     @IBOutlet weak var backgroundImageView: UIImageView!
@@ -50,6 +54,26 @@ class DetailTableViewCell: UITableViewCell {
     @objc func updateTimer () {
       let secondsNow = Int (Date().timeIntervalSince1970)
       let totalSeconds = timestamp - secondsNow
+        
+      if (totalSeconds > 0) {
+            self.minuteLabel.isHidden = false
+            self.hourLabel.isHidden = false
+            self.daysLabel.isHidden = false
+            self.minuteSubLabel.isHidden = false
+            self.hourSubLabel.isHidden = false
+            self.daysSubLabel.isHidden = false
+            self.finishEventLabel.isHidden = true
+      } else {
+         
+         self.minuteLabel.isHidden = true
+         self.hourLabel.isHidden = true
+         self.daysLabel.isHidden = true
+         self.minuteSubLabel.isHidden = true
+         self.hourSubLabel.isHidden = true
+         self.daysSubLabel.isHidden = true
+         self.finishEventLabel.isHidden = false
+         
+      }
       
       let seconds: Int = totalSeconds % 60
       let minutes: Int = (totalSeconds / 60) % 60
