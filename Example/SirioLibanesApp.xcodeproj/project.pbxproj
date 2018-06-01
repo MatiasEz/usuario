@@ -30,6 +30,8 @@
 		98DE10012027C20500DB1A7C /* AssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DE10002027C20500DB1A7C /* AssignmentViewController.swift */; };
 		98DE10032027C27800DB1A7C /* SongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DE10022027C27800DB1A7C /* SongsViewController.swift */; };
 		98DE10042027DC8700DB1A7C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DE0FFF2027C14700DB1A7C /* DetailViewController.swift */; };
+		F712AADC20BC9B3B0065658C /* SocialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712AADB20BC9B3B0065658C /* SocialTableViewCell.swift */; };
+		F712AADE20C095230065658C /* RedSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712AADD20C095230065658C /* RedSocial.swift */; };
 		F72BD9E420A76DB700A63011 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72BD9E320A76DB600A63011 /* DetailTableViewCell.swift */; };
 		F72BD9E620A77FD500A63011 /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72BD9E520A77FD500A63011 /* Persona.swift */; };
 		F72BD9E820A7976300A63011 /* Trabajador.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72BD9E720A7976300A63011 /* Trabajador.swift */; };
@@ -79,6 +81,8 @@
 		98DE10022027C27800DB1A7C /* SongsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SongsViewController.swift; path = Classes/SongsViewController.swift; sourceTree = "<group>"; };
 		B57A9B50AC19E9969C1742D4 /* SirioLibanesApp.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SirioLibanesApp.podspec; path = ../SirioLibanesApp.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B68CCAAA50F3F52468FB4528 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		F712AADB20BC9B3B0065658C /* SocialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTableViewCell.swift; sourceTree = "<group>"; };
+		F712AADD20C095230065658C /* RedSocial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedSocial.swift; sourceTree = "<group>"; };
 		F72BD9E320A76DB600A63011 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTableViewCell.swift; path = Classes/DetailTableViewCell.swift; sourceTree = "<group>"; };
 		F72BD9E520A77FD500A63011 /* Persona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
 		F72BD9E720A7976300A63011 /* Trabajador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trabajador.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				F76C5C0C20BB67D0005EBCD3 /* PermissionViewController.swift */,
 				9855A95E2027398600515E1A /* LoginViewController.swift */,
+				F712AADD20C095230065658C /* RedSocial.swift */,
 				F72BD9E520A77FD500A63011 /* Persona.swift */,
 				F72BD9E720A7976300A63011 /* Trabajador.swift */,
 				9855A96220274D1E00515E1A /* InitialViewController.swift */,
@@ -167,6 +172,7 @@
 				98DE0FFF2027C14700DB1A7C /* DetailViewController.swift */,
 				F72BD9E320A76DB600A63011 /* DetailTableViewCell.swift */,
 				98DE0FFD2027C11600DB1A7C /* SocialViewController.swift */,
+				F712AADB20BC9B3B0065658C /* SocialTableViewCell.swift */,
 				98DE10002027C20500DB1A7C /* AssignmentViewController.swift */,
 				9861C86E202AA59E0004B1F5 /* AssignmentTableViewCell.swift */,
 				98DE10022027C27800DB1A7C /* SongsViewController.swift */,
@@ -452,6 +458,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F712AADC20BC9B3B0065658C /* SocialTableViewCell.swift in Sources */,
 				F72BD9E620A77FD500A63011 /* Persona.swift in Sources */,
 				F76C5C0D20BB67D0005EBCD3 /* PermissionViewController.swift in Sources */,
 				98DE10032027C27800DB1A7C /* SongsViewController.swift in Sources */,
@@ -467,6 +474,7 @@
 				F72BD9E420A76DB700A63011 /* DetailTableViewCell.swift in Sources */,
 				9861C86F202AA59E0004B1F5 /* AssignmentTableViewCell.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				F712AADE20C095230065658C /* RedSocial.swift in Sources */,
 				9861C871202ABF2D0004B1F5 /* SongTableViewCell.swift in Sources */,
 				98DE0FFA2027B71100DB1A7C /* HomeTableViewCell.swift in Sources */,
 				9855A96320274D1E00515E1A /* InitialViewController.swift in Sources */,

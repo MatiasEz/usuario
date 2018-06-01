@@ -35,5 +35,83 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SirioLibanesApp/Classes/SongsViewController.swift"
+            timestampString = "549493331.667349"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "SongsViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Eventos.SongsViewController.tableView.getter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UITableView&gt;"
+                  moduleName = "Eventos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/federicuelo/SirioLibanesUsuario/Example/SirioLibanesApp/Classes/SongsViewController.swift"
+                  timestampString = "549493332.693791"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Eventos.SongsViewController.tableView.setter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UITableView&gt;"
+                  moduleName = "Eventos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/federicuelo/SirioLibanesUsuario/Example/SirioLibanesApp/Classes/SongsViewController.swift"
+                  timestampString = "549493332.7006789"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "96">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Eventos.SongsViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; Eventos.SongsViewController"
+                  moduleName = "Eventos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/federicuelo/SirioLibanesUsuario/Example/SirioLibanesApp/Classes/SongsViewController.swift"
+                  timestampString = "549493332.70636"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "904">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Eventos.SongsViewController.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;Eventos.SongsViewController&gt;"
+                  moduleName = "Eventos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/federicuelo/SirioLibanesUsuario/Example/SirioLibanesApp/Classes/SongsViewController.swift"
+                  timestampString = "549493332.711966"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "868">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
