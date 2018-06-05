@@ -10,24 +10,19 @@ import UIKit
 
 class SocialTableViewCell: UITableViewCell {
 
-   @IBOutlet weak var socialButton: UIButton!
    @IBOutlet weak var socialLabel: UILabel!
    @IBOutlet weak var redSocialImage: UIImageView!
-  
+   @IBOutlet weak var containerView: UIView!
+   
    
    override func awakeFromNib() {
       
-      socialButton.layer.cornerRadius = 20
-      socialButton.backgroundColor = .clear
-      
-        super.awakeFromNib()
+      self.containerView.backgroundColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0)
+      self.containerView.layer.cornerRadius = 20
+      self.containerView.layer.borderWidth = 1
+      self.containerView.layer.borderColor = UIColor.blue.cgColor
+
+      super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

@@ -14,67 +14,61 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
    
     public var information : [AnyHashable: Any] = [:]
     public var pageName : String = ""
-   var items : [RedSocial] = []
+    var items : [RedSocial] = []
     override func viewWillAppear(_ animated: Bool) {
-      
-      
       self.tableView.dataSource = self;
       self.tableView.delegate = self;
-        
-        let social = information ["redes"] as! [AnyHashable: Any]
-        
-        let item = social ["facebook"] as! [AnyHashable: Any]
-        let string = item ["name"] ?? ""
       
-      self.socialButton.setTitle("\(string)", for: UIControlState.normal)
-        
-        let item2 = social ["instagram"] as! [AnyHashable: Any]
-        let string2 = item2 ["name"] ?? ""
-        self.instagramButton.setTitle("\(string2)", for: UIControlState.normal)
-        
-        let item3 = social ["twitter"] as! [AnyHashable: Any]
-        let string3 = item3 ["name"] ?? ""
-        self.twitterButton.setTitle("\(string3)", for: UIControlState.normal)
-        
-      
-        
-     
-      self.navigationItem.backBarButtonItem?.title = ""
-        
-        super.viewWillAppear(animated)
+      super.viewWillAppear(animated)
+
+      self.addSocialNetwork(key: "facebook")
+      self.addSocialNetwork(key: "twitter")
+      self.addSocialNetwork(key: "instagram")
+      self.addSocialNetwork(key: "webpage")
+      self.addSocialNetwork(key: "snapchat")
+      self.addSocialNetwork(key: "youtube")
         
     }
    
+   func addSocialNetwork(key: String) {
+      let social = information ["redes"] as! [AnyHashable: Any]
+      let facebookItem = social [key] as? [String: String]
+      if let facebookItem = facebookItem {
+         let facebookName = facebookItem ["name"] ?? ""
+         let facebookLink = facebookItem ["link"] ?? ""
+         let redSocial = RedSocial(identifier: key, tag: facebookName, link: facebookLink)
+         items.append(redSocial)
+      }
+   }
+   
    
    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
-      
+      return self.items.count;
    }
+   
    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
-   let cell = self.tableView.dequeueReusableCell(withIdentifier: "socialCell")
-      return cell!
-
-      
+      let cell = self.tableView.dequeueReusableCell(withIdentifier: "socialCell") as! SocialTableViewCell
+      let row : Int = indexPath.row
+      let currentItem : RedSocial = items[row]
+      cell.socialLabel.text = currentItem.tag
+      let imageName = currentItem.identifier
+      cell.redSocialImage.image = UIImage(named: currentItem.identifier)
+      return cell
    }
-
-    @IBAction func facebookPress(_ sender: Any) {
-        let social = information ["redes"] as! [AnyHashable: Any]
-        let item = social ["facebook"] as! [AnyHashable: Any]
-      let applink = (item ["applink"] ?? "") as! String
-      let canOpenApplink = UIApplication.shared.canOpenURL(URL(string: applink) ?? URL(string:"12312")!);
-      let string = (item ["link"] ?? "") as! String
-      let canOpen = UIApplication.shared.canOpenURL(URL(string: string)  ?? URL(string:"12312")!);
-      if (canOpenApplink) {
-         UIApplication.shared.openURL(URL(string: applink)!)
-      } else if (canOpen) {
-         UIApplication.shared.openURL(URL(string: string)!)
+   
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      let row : Int = indexPath.row
+      let currentItem : RedSocial = items[row]
+      
+      let canOpen = UIApplication.shared.canOpenURL(URL(string: currentItem.link)  ?? URL(string:"12312")!);
+      if (canOpen) {
+         UIApplication.shared.openURL(URL(string: currentItem.link)!)
       } else {
          displayError()
       }
     }
     
-
     
     
    
@@ -84,4 +78,5 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.present(alert, animated: true, completion: nil)
     }
     
+
 }

@@ -10,20 +10,15 @@ import UIKit
 
 class RedSocial: NSObject {
    
-   var title : String
-   var applink : String?
+   var identifier : String
    var tag : String
    var link : String
    
-   public init(title: String, tag: String, link: String, applink: String? ) {
-      self.title = title
+   public init(identifier: String, tag: String, link: String) {
+      self.identifier = identifier
       self.tag = tag
       self.link = link
-      self.applink = applink
-
-}
-
-
+   }
 }
 
 
