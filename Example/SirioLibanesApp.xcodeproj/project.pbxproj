@@ -36,6 +36,7 @@
 		F72BD9E620A77FD500A63011 /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72BD9E520A77FD500A63011 /* Persona.swift */; };
 		F72BD9E820A7976300A63011 /* Trabajador.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72BD9E720A7976300A63011 /* Trabajador.swift */; };
 		F76C5C0D20BB67D0005EBCD3 /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76C5C0C20BB67D0005EBCD3 /* PermissionViewController.swift */; };
+		F7E7F16B20DB01CA006E7455 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E7F16A20DB01CA006E7455 /* QRViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		F72BD9E520A77FD500A63011 /* Persona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
 		F72BD9E720A7976300A63011 /* Trabajador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trabajador.swift; sourceTree = "<group>"; };
 		F76C5C0C20BB67D0005EBCD3 /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
+		F7E7F16A20DB01CA006E7455 /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		FA6828CE2CA5E5CE571FF3E7 /* Pods_SirioLibanesApp_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SirioLibanesApp_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				F7E7F16A20DB01CA006E7455 /* QRViewController.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				F76C5C0C20BB67D0005EBCD3 /* PermissionViewController.swift */,
 				9855A95E2027398600515E1A /* LoginViewController.swift */,
@@ -360,6 +363,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/SirioLibanesApp/SirioLibanesApp.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -370,6 +374,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SirioLibanesApp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -475,6 +480,7 @@
 				9861C86F202AA59E0004B1F5 /* AssignmentTableViewCell.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				F712AADE20C095230065658C /* RedSocial.swift in Sources */,
+				F7E7F16B20DB01CA006E7455 /* QRViewController.swift in Sources */,
 				9861C871202ABF2D0004B1F5 /* SongTableViewCell.swift in Sources */,
 				98DE0FFA2027B71100DB1A7C /* HomeTableViewCell.swift in Sources */,
 				9855A96320274D1E00515E1A /* InitialViewController.swift in Sources */,

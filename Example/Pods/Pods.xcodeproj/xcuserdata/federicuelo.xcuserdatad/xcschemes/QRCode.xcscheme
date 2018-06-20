@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E4DD95323C54A78F879DAB0F1508B8E7'
-               BlueprintName = 'nanopb'
+               BlueprintIdentifier = '597AF2440A6C05E387947FD8AFCBB234'
+               BlueprintName = 'QRCode'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'nanopb.framework'>
+               BuildableName = 'QRCode.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
