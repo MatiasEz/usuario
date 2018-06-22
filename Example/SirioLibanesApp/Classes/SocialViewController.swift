@@ -8,103 +8,116 @@
 
 import UIKit
 
-class SocialViewController: UIViewController
-{
+class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-    @IBOutlet weak var facebookButton: UIButton!
-    
-    @IBOutlet weak var instagramButton: UIButton!
-    
-    @IBOutlet weak var twitterButton: UIButton!
-    
+   @IBOutlet weak var tableView: UITableView!
+   
+   
+   
+   
     public var information : [AnyHashable: Any] = [:]
     public var pageName : String = ""
-    
+    var items : [RedSocial] = []
     override func viewWillAppear(_ animated: Bool) {
-        
-        let social = information ["redes"] as! [AnyHashable: Any]
-        
-        let item = social ["facebook"] as! [AnyHashable: Any]
-        let string = item ["name"] ?? ""
-        self.facebookButton.setTitle("\(string)", for: UIControlState.normal)
-        
-        let item2 = social ["instagram"] as! [AnyHashable: Any]
-        let string2 = item2 ["name"] ?? ""
-        self.instagramButton.setTitle("\(string2)", for: UIControlState.normal)
-        
-        let item3 = social ["twitter"] as! [AnyHashable: Any]
-        let string3 = item3 ["name"] ?? ""
-        self.twitterButton.setTitle("\(string3)", for: UIControlState.normal)
-        
-        twitterButton.layer.cornerRadius = 20
-        twitterButton.layer.borderWidth = 1
-        twitterButton.layer.borderColor = twitterButton.backgroundColor!.cgColor
-        twitterButton.backgroundColor = .clear
-        
-        instagramButton.layer.cornerRadius = 20
-        instagramButton.layer.borderWidth = 1
-        instagramButton.layer.borderColor = instagramButton.backgroundColor!.cgColor
-        instagramButton.backgroundColor = .clear
-        
-        facebookButton.layer.cornerRadius = 20
-        facebookButton.layer.borderWidth = 1
-        facebookButton.layer.borderColor = facebookButton.backgroundColor!.cgColor
-        facebookButton.backgroundColor = .clear
+      self.tableView.dataSource = self;
+      self.tableView.delegate = self;
       
-      self.navigationItem.backBarButtonItem?.title = ""
-        
-        super.viewWillAppear(animated)
-        
-    }
-    @IBAction func facebookPress(_ sender: Any) {
-        let social = information ["redes"] as! [AnyHashable: Any]
-        let item = social ["facebook"] as! [AnyHashable: Any]
-      let applink = (item ["applink"] ?? "") as! String
-      let canOpenApplink = UIApplication.shared.canOpenURL(URL(string: applink) ?? URL(string:"12312")!);
-      let string = (item ["link"] ?? "") as! String
-      let canOpen = UIApplication.shared.canOpenURL(URL(string: string)  ?? URL(string:"12312")!);
-      if (canOpenApplink) {
-         UIApplication.shared.openURL(URL(string: applink)!)
-      } else if (canOpen) {
-         UIApplication.shared.openURL(URL(string: string)!)
+      super.viewWillAppear(animated)
+
+      self.addSocialNetwork(key: "facebook")
+      self.addSocialNetwork(key: "twitter")
+      self.addSocialNetwork(key: "instagram")
+      self.addSocialNetwork(key: "webpage")
+      self.addSocialNetwork(key: "snapchat")
+      self.addSocialNetwork(key: "youtube")
+      
+   }
+   
+ func addSocialNetwork(key: String) {
+      let social = information ["redes"] as! [AnyHashable: Any]
+      let facebookItem = social [key] as? [String: String]
+      if let facebookItem = facebookItem {
+         let facebookName = facebookItem ["name"] ?? ""
+         let facebookLink = facebookItem ["link"] ?? ""
+         let redSocial = RedSocial(identifier: key, tag: facebookName, link: facebookLink)
+         items.append(redSocial)
+         
+         
+      }
+   }
+   
+   
+   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return self.items.count;
+   }
+   
+   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      
+      let facebookColour = UIColor(red:0.23, green:0.35, blue:0.60, alpha:1.0)
+      let instagramColour = UIColor(red:0.91, green:0.35, blue:0.31, alpha:1.0)
+      let twitterColour = UIColor(red:0.00, green:0.67, blue:0.93, alpha:1.0)
+      let snapchatColour =  UIColor(red:1.00, green:1.00, blue:0.21, alpha:1.0)
+      let webPageColour = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0)
+      let youtubeColour = UIColor(red:1.00, green:0.00, blue:0.00, alpha:1.0)
+      
+      
+      let cell = self.tableView.dequeueReusableCell(withIdentifier: "socialCell") as! SocialTableViewCell
+      let row : Int = indexPath.row
+      let currentItem : RedSocial = items[row]
+      cell.socialLabel.text = currentItem.tag
+      let imageName = currentItem.identifier
+      cell.redSocialImage.image = UIImage(named: currentItem.identifier)
+      self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+      switch (currentItem.identifier) {
+      
+      case "facebook" :    cell.containerView.layer.borderColor = facebookColour.cgColor
+      break
+      
+      case "instagram" :   cell.containerView.layer.borderColor = instagramColour.cgColor
+      
+         break
+      
+      
+      case "twitter" :    cell.containerView.layer.borderColor = twitterColour.cgColor
+      break
+      
+      
+      case "snapchat" :  cell.containerView.layer.borderColor = snapchatColour.cgColor
+      break
+      
+      
+      case "youtube" :   cell.containerView.layer.borderColor = youtubeColour.cgColor
+      break
+      
+      
+      case "webpage" :    cell.containerView.layer.borderColor = webPageColour.cgColor
+      break
+      
+      default:
+      break
+      
+      }
+      
+      return cell
+
+   }
+   
+   
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      let row : Int = indexPath.row
+      let currentItem : RedSocial = items[row]
+      
+      let canOpen = UIApplication.shared.canOpenURL(URL(string: currentItem.link)  ?? URL(string:"12312")!);
+      if (canOpen) {
+         UIApplication.shared.openURL(URL(string: currentItem.link)!)
       } else {
          displayError()
       }
     }
     
-    @IBAction func instagramPress(_ sender: Any) {
-        let social = information ["redes"] as! [AnyHashable: Any]
-        let item = social ["instagram"] as! [AnyHashable: Any]
-         let applink = (item ["applink"] ?? "") as! String
-         let canOpenApplink = UIApplication.shared.canOpenURL(URL(string: applink) ?? URL(string:"12312")!);
-         let string = (item ["link"] ?? "") as! String
-         let canOpen = UIApplication.shared.canOpenURL(URL(string: string)  ?? URL(string:"12312")!);
-         if (canOpenApplink) {
-            UIApplication.shared.openURL(URL(string: applink)!)
-         } else if (canOpen) {
-            UIApplication.shared.openURL(URL(string: string)!)
-        } else {
-            displayError()
-        }
-    }
     
     
-    @IBAction func twitterPress(_ sender: Any) {
-        let social = information ["redes"] as! [AnyHashable: Any]
-        let item = social ["twitter"] as! [AnyHashable: Any]
-      let applink = (item ["applink"] ?? "") as! String
-      let canOpenApplink = UIApplication.shared.canOpenURL(URL(string: applink) ?? URL(string:"12312")!);
-      let string = (item ["link"] ?? "") as! String
-      let canOpen = UIApplication.shared.canOpenURL(URL(string: string)  ?? URL(string:"12312")!);
-      if (canOpenApplink) {
-         UIApplication.shared.openURL(URL(string: applink)!)
-      } else if (canOpen) {
-         UIApplication.shared.openURL(URL(string: string)!)
-      } else {
-         displayError()
-      }
-    }
-    
+   
     func displayError (message: String = "No acceder a este link, intenta buscando desde el navegador.") {
         let alert = UIAlertController(title: "¡Hubo un error!", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "De acuerdo", style: UIAlertActionStyle.default, handler: nil))
@@ -112,3 +125,4 @@ class SocialViewController: UIViewController
     }
     
 }
+

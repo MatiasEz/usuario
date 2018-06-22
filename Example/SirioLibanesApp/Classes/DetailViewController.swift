@@ -9,12 +9,15 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import QRCode
 
 class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var fourButton: UIButton!
     @IBOutlet weak var oneButton: UIButton!
     @IBOutlet weak var twoButton: UIButton!
     @IBOutlet weak var threeButton: UIButton!
+    @IBOutlet weak var qrButton: UIButton!
+    @IBOutlet weak var qrImage: UIImageView!
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var maybeButton: UIButton!
@@ -27,11 +30,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     public var pageName : String = ""
    
    var numPhone : String = ""
-    
-    
+   
    var detailCell : DetailTableViewCell?
     var ref: DatabaseReference!
-   
+
    let kRed = UIColor(red: 206.0/255.0, green: 46.0/255.0, blue: 35.0/255.0, alpha: 1.0)
    let kGreen = UIColor(red: 3.0/255.0, green: 178.0/255.0, blue: 32.0/255.0, alpha: 1.0)
    let kOrange = UIColor(red: 242.0/255.0, green: 117.0/255.0, blue: 0.0/255.0, alpha: 1.0)
@@ -183,6 +185,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
       fourButton.layer.borderWidth = 1
       fourButton.layer.borderColor = UIColor.white.cgColor
         
+        qrButton.backgroundColor = .clear
+        qrButton.layer.cornerRadius = 20
+        qrButton.layer.borderWidth = 1
+        qrButton.layer.borderColor = UIColor.white.cgColor
+        
         confirmButton.backgroundColor = .clear
         confirmButton.layer.cornerRadius = 20
         confirmButton.layer.borderWidth = 1
@@ -200,8 +207,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
       
       self.navigationItem.backBarButtonItem?.title = ""
       self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
-        super.viewDidLoad()
+     
+      
+      
+      
+      super.viewDidLoad()
     }
+   
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -288,8 +300,22 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     @IBAction func callPhone(_ sender: Any) {
-        guard let number = URL(string: "tel://" + self.labelPhone.text!) else { return }
-      UIApplication.shared.openURL(number)
+      let wspLink = "https://api.whatsapp.com/send?phone=\(self.labelPhone.text!)"
+      let wspUrl = URL(string: wspLink)
+
+      let telefonoLink = "tel://\(self.labelPhone.text!)"
+      let telefonoUrl = URL(string: telefonoLink)
+      
+      if UIApplication.shared.canOpenURL(wspUrl! as URL) {
+         UIApplication.shared.openURL(wspUrl! as URL)
+         return
+      }
+      if UIApplication.shared.canOpenURL(telefonoUrl! as URL) {
+         UIApplication.shared.openURL(telefonoUrl! as URL)
+         return
+      }
+
+      self.displayError(message: "No pudimos ejecutar tu llamada, intenta hacerlo manualmente")
       
     }
     
