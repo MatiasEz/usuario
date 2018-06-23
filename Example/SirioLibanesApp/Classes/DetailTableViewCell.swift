@@ -54,7 +54,8 @@ class DetailTableViewCell: UITableViewCell {
     @objc func updateTimer () {
       let secondsNow = Int (Date().timeIntervalSince1970)
       let totalSeconds = timestamp - secondsNow
-        
+    let eventDuration = 21600
+
       if (totalSeconds > 0) {
             self.minuteLabel.isHidden = false
             self.hourLabel.isHidden = false
@@ -74,6 +75,13 @@ class DetailTableViewCell: UITableViewCell {
          self.finishEventLabel.isHidden = false
          
       }
+        if (totalSeconds < -eventDuration) {
+            self.finishEventLabel.text = "¡Gracias por venir!"
+        } else {
+            self.finishEventLabel.text = "¡Ha comenzado el evento!"
+            
+           
+        }
       
       let seconds: Int = totalSeconds % 60
       let minutes: Int = (totalSeconds / 60) % 60
