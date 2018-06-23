@@ -1076,7 +1076,7 @@ musical</string>
                                                         <rect key="frame" x="0.0" y="787" width="414" height="120"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeV-pT-f3J">
-                                                                <rect key="frame" x="16" y="80.333333333333371" width="317" height="0.0"/>
+                                                                <rect key="frame" x="16" y="80.333333333333371" width="326" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
@@ -1087,10 +1087,10 @@ musical</string>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aap-kJ-QXp">
-                                                                <rect key="frame" x="343" y="53.333333333333371" width="55" height="55"/>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aap-kJ-QXp">
+                                                                <rect key="frame" x="352" y="58" width="46" height="46"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="55" id="Ccj-zs-nXy"/>
+                                                                    <constraint firstAttribute="width" constant="46" id="Ccj-zs-nXy"/>
                                                                     <constraint firstAttribute="width" secondItem="Aap-kJ-QXp" secondAttribute="height" multiplier="1:1" id="MYh-OE-WTW"/>
                                                                 </constraints>
                                                                 <state key="normal" backgroundImage="wsp"/>
