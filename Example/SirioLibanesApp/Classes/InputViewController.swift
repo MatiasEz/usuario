@@ -119,30 +119,31 @@ class InputViewController: UIViewController, BarcodeScannerCodeDelegate, Barcode
     }
 
     @IBAction func redeem(_ sender: Any?) {
-        
-        let redeemCode = codeTextfield.text!
-        
-        if (redeemCode.isEmpty) {
-            displayError(message: "Debes ingresar el código que aparece en el mail de invitación")
-            return
-        }
-        print (redeemCode)
-        
-        ref.child("Codigos").child(redeemCode).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let eventName = snapshot.value as? String!
-            if (eventName?.isEmpty ?? true) {
-                self.displayError(message: "Ingresaste un código incorrecto")
-            } else {
-                self.pageName = eventName!
-                self.assignKeyToUser(eventName!)
-                self.assignUserToEvent()
-                self.getEventDataAndContinue(eventName!)
-            }
-        }) { (error) in
-            self.displayError(message: "No pudimos agregar tu evento, intenta mas tarde.")
-        }
-        
+      
+      let redeemCode = codeTextfield.text!
+      
+      if (redeemCode.isEmpty) {
+         displayError(message: "Debes ingresar el código que aparece en el mail de invitación")
+         return
+      }
+      print (redeemCode)
+      
+      ref.child("Codigos").child(redeemCode).observeSingleEvent(of: .value, with: { (snapshot) in
+         // Get user value
+         let eventName = snapshot.value as? String!
+         if (eventName?.isEmpty ?? true) {
+            self.displayError(message: "Ingresaste un código incorrecto")
+         } else {
+            self.pageName = eventName!
+            self.checkUserIsValidAndContinue()
+
+         }
+      }) { (error) in
+         self.displayError(message: "No pudimos agregar tu evento, intenta mas tarde.")
+      }
+      
+      
+      
     }
     
     func assignKeyToUser (_ key : String)
@@ -236,4 +237,43 @@ class InputViewController: UIViewController, BarcodeScannerCodeDelegate, Barcode
             viewController.pageName = self.pageName
         }
     }
+    
+    func continueFlowForvalidUser (){
+      
+      self.assignKeyToUser(self.pageName)
+      self.assignUserToEvent()
+      self.getEventDataAndContinue(self.pageName)
+      
+        
+        
+    }
+    func continueFlowForInvalidUser (){
+      self.performSegue(withIdentifier: "error", sender: self)
+
+      
+    }
+ 
+   
+   func checkUserIsValidAndContinue (){
+      
+      
+      ref.child("Recepcion").child(pageName).observeSingleEvent(of: .value, with: { (snapshot) in
+        
+         guard let invitadosRaw = snapshot.value as? [[String:Any]] else {  self.displayError(message:"No se puede acceder al evento por el momento, intenta más tarde.")
+            return
+         }
+            let userEmail = Auth.auth().currentUser?.email;
+          for invitadoMap in invitadosRaw {
+            let invitadoParsed = Invitado(map: invitadoMap)
+            if (userEmail == invitadoParsed.mail) {
+               
+               self.continueFlowForvalidUser()
+               
+               return
+            }
+         }
+         self.continueFlowForInvalidUser()
+      }
+)
+}
 }

@@ -36,6 +36,8 @@
 		F72BD9E620A77FD500A63011 /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72BD9E520A77FD500A63011 /* Persona.swift */; };
 		F72BD9E820A7976300A63011 /* Trabajador.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72BD9E720A7976300A63011 /* Trabajador.swift */; };
 		F76C5C0D20BB67D0005EBCD3 /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76C5C0C20BB67D0005EBCD3 /* PermissionViewController.swift */; };
+		F77BCB8D2112802000483046 /* InvitationErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BCB8C2112802000483046 /* InvitationErrorViewController.swift */; };
+		F77BCB8F2117758E00483046 /* Invitado.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BCB8E2117758E00483046 /* Invitado.swift */; };
 		F7E7F16B20DB01CA006E7455 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E7F16A20DB01CA006E7455 /* QRViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +90,8 @@
 		F72BD9E520A77FD500A63011 /* Persona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
 		F72BD9E720A7976300A63011 /* Trabajador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trabajador.swift; sourceTree = "<group>"; };
 		F76C5C0C20BB67D0005EBCD3 /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
+		F77BCB8C2112802000483046 /* InvitationErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationErrorViewController.swift; sourceTree = "<group>"; };
+		F77BCB8E2117758E00483046 /* Invitado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invitado.swift; sourceTree = "<group>"; };
 		F7E7F16A20DB01CA006E7455 /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		FA6828CE2CA5E5CE571FF3E7 /* Pods_SirioLibanesApp_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SirioLibanesApp_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -162,9 +166,11 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				F7E7F16A20DB01CA006E7455 /* QRViewController.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				F77BCB8C2112802000483046 /* InvitationErrorViewController.swift */,
 				F76C5C0C20BB67D0005EBCD3 /* PermissionViewController.swift */,
 				9855A95E2027398600515E1A /* LoginViewController.swift */,
 				F712AADD20C095230065658C /* RedSocial.swift */,
+				F77BCB8E2117758E00483046 /* Invitado.swift */,
 				F72BD9E520A77FD500A63011 /* Persona.swift */,
 				F72BD9E720A7976300A63011 /* Trabajador.swift */,
 				9855A96220274D1E00515E1A /* InitialViewController.swift */,
@@ -471,8 +477,10 @@
 				9855A95F2027398600515E1A /* LoginViewController.swift in Sources */,
 				98DE10042027DC8700DB1A7C /* DetailViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				F77BCB8F2117758E00483046 /* Invitado.swift in Sources */,
 				98DE0FF620278A9200DB1A7C /* InputViewController.swift in Sources */,
 				98DE0FFE2027C11600DB1A7C /* SocialViewController.swift in Sources */,
+				F77BCB8D2112802000483046 /* InvitationErrorViewController.swift in Sources */,
 				F72BD9E820A7976300A63011 /* Trabajador.swift in Sources */,
 				98DE10012027C20500DB1A7C /* AssignmentViewController.swift in Sources */,
 				981C3C8E20277767004B3282 /* RegisterViewController.swift in Sources */,

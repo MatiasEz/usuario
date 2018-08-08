@@ -34,7 +34,10 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
    }
    
  func addSocialNetwork(key: String) {
-      let social = information ["redes"] as! [AnyHashable: Any]
+   guard let social = information ["redes"] as? [AnyHashable: Any] else { self.displayError(message:"No hay redes sociales asociadas a este evento. Intenta mas tarde.")
+      
+      return
+   }
       let facebookItem = social [key] as? [String: String]
       if let facebookItem = facebookItem {
          let facebookName = facebookItem ["name"] ?? ""
@@ -106,6 +109,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let row : Int = indexPath.row
       let currentItem : RedSocial = items[row]
+      
       
       let canOpen = UIApplication.shared.canOpenURL(URL(string: currentItem.link)  ?? URL(string:"12312")!);
       if (canOpen) {
