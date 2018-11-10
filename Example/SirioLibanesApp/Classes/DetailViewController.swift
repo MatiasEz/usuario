@@ -18,6 +18,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var threeButton: UIButton!
     @IBOutlet weak var qrButton: UIButton!
     @IBOutlet weak var qrImage: UIImageView!
+    @IBOutlet weak var giftButton: UIButton!
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var maybeButton: UIButton!
@@ -185,6 +186,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
       fourButton.layer.borderWidth = 1
       fourButton.layer.borderColor = UIColor.white.cgColor
         
+        giftButton.backgroundColor = .clear
+        giftButton.layer.cornerRadius = 20
+        giftButton.layer.borderWidth = 1
+        giftButton.layer.borderColor = UIColor.white.cgColor
+        
         qrButton.backgroundColor = .clear
         qrButton.layer.cornerRadius = 20
         qrButton.layer.borderWidth = 1
@@ -298,7 +304,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             viewController.information = self.information
             viewController.pageName = self.pageName
         }
+      
+      if segue.identifier == "gift" {
+         let viewController: GiftViewController = segue.destination as! GiftViewController
+         viewController.information = self.information
+         viewController.pageName = self.pageName
+      }
     }
+   
     @IBAction func callPhone(_ sender: Any) {
       let wspLink = "https://api.whatsapp.com/send?phone=\(self.labelPhone.text!)"
       let wspUrl = URL(string: wspLink)

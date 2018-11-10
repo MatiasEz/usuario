@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SirioLibanesApp/Classes/DetailViewController.swift"
-            timestampString = "551228462.812799"
+            timestampString = "559953299.753297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "DetailViewController"
             landmarkType = "3">
          </BreakpointContent>
